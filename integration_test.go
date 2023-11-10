@@ -12,6 +12,7 @@ import (
 
 const (
 	LocationID = 3094
+	SensorID   = 30940001
 )
 
 func TestGetLocations(t *testing.T) {
@@ -22,6 +23,18 @@ func TestGetLocations(t *testing.T) {
 	assert.NotNil(t, res, "expecting non-nil result")
 	if res != nil {
 		assert.Equal(t, LocationID, res.Locations[0].LocationID, "expecting correct LocationID")
+
+	}
+}
+
+func TestGetSensors(t *testing.T) {
+	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+
+	res, err := c.GetSensors(LocationID)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+	if res != nil {
+		assert.Equal(t, SensorID, res.Sensors[0].SensorID, "expecting correct LocationID")
 
 	}
 }
