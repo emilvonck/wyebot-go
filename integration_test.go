@@ -4,6 +4,7 @@
 package wyebot
 
 import (
+	"context"
 	"os"
 	"testing"
 
@@ -18,7 +19,8 @@ const (
 func TestGetLocations(t *testing.T) {
 	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
 
-	res, err := c.GetLocations()
+	ctx := context.Background()
+	res, err := c.GetLocations(ctx)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 	if res != nil {
@@ -30,7 +32,8 @@ func TestGetLocations(t *testing.T) {
 func TestGetSensors(t *testing.T) {
 	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
 
-	res, err := c.GetSensors(LocationID)
+	ctx := context.Background()
+	res, err := c.GetSensors(ctx, LocationID)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 	if res != nil {

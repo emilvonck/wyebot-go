@@ -1,9 +1,9 @@
 package wyebot
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
 	"time"
@@ -36,7 +36,8 @@ type successResponse struct {
 	Data   interface{} `json:"results"`
 }
 
-func (c *Client) sendRequest(req *http.Request, v interface{}, detail_key string) error {
+func (c *Client) sendRequest(ctx context.Context, req *http.Request, v interface{}, detail_key string) error {
+	req = req.WithContext(ctx)
 	req.Header.Set("Accept", "application/json; charset=utf-8")
 	req.Header.Set("api_key", c.apiKey)
 
@@ -53,7 +54,7 @@ func (c *Client) sendRequest(req *http.Request, v interface{}, detail_key string
 			return errors.New(errRes.Message)
 		}
 
-		return fmt.Errorf("unknown error, status code: %d", res.StatusCode)
+		return errors.New(errRes.Message)
 	}
 
 	responseData, err := io.ReadAll(res.Body)

@@ -2,6 +2,7 @@ package wyebot
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -16,7 +17,7 @@ type Sensor struct {
 	SensorName string `json:"sensor_name"`
 }
 
-func (c *Client) GetSensors(location_id int) (*SensorList, error) {
+func (c *Client) GetSensors(ctx context.Context, location_id int) (*SensorList, error) {
 	body := map[string]int{"location_id": location_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -27,7 +28,7 @@ func (c *Client) GetSensors(location_id int) (*SensorList, error) {
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 	res := SensorList{}
-	if err := c.sendRequest(req, &res, "sensor_details"); err != nil {
+	if err := c.sendRequest(ctx, req, &res, "sensor_details"); err != nil {
 		return nil, err
 	}
 	return &res, nil
