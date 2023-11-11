@@ -41,3 +41,15 @@ func TestGetSensors(t *testing.T) {
 
 	}
 }
+
+func TestGetSensorInfo(t *testing.T) {
+	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+
+	ctx := context.Background()
+	res, err := c.GetSensorInfo(ctx, SensorID)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+	if res != nil {
+		assert.Equal(t, SensorID, res.SensorInfo.SensorID, "expecting correct LocationID")
+	}
+}
