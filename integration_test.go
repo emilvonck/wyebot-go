@@ -74,3 +74,12 @@ func TestGetSensorNetworkInfo(t *testing.T) {
 		assert.Equal(t, SensorID, res.SensorNetworkInfo.SensorID, "expecting correct LocationID")
 	}
 }
+
+func TestGetAccessPointList(t *testing.T) {
+	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+
+	ctx := context.Background()
+	res, err := c.GetAccessPointList(ctx, SensorID)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
