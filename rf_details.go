@@ -9,29 +9,29 @@ import (
 )
 
 type RfAnalyticsRadio0 struct {
-	OutChannel              string   `json:"out_channel"`
-	AirtimeTotalPercent     string   `json:"airtime_total_percent"`
-	MgmtPercent             string   `json:"mgmt_percent"`
-	CtrlPercent             string   `json:"ctrl_percent"`
-	DataPercent             string   `json:"data_percent"`
-	OthersPercent           string   `json:"others_percent"`
-	AvailablePercent        string   `json:"available_percent"`
-	Noise                   string   `json:"noise"`
-	ClientMacList           []string `json:"client_mac_list"`
-	ClientHostnameList      []string `json:"client_hostname_list"`
-	ClientAirtimePercentage string   `json:"client_airtime_percentage"`
+	OutChannel          string `json:"out_channel"`
+	AirtimeTotalPercent string `json:"airtime_total_percent"`
+	MgmtPercent         string `json:"mgmt_percent"`
+	CtrlPercent         string `json:"ctrl_percent"`
+	DataPercent         string `json:"data_percent"`
+	OthersPercent       string `json:"others_percent"`
+	AvailablePercent    string `json:"available_percent"`
+	Noise               string `json:"noise"`
+	//ClientMacList       []string `json:"client_mac_list"`
+	//ClientHostnameList      []string `json:"client_hostname_list"`
+	ClientAirtimePercentage string `json:"client_airtime_percentage"`
 }
 type RfAnalyticsRadio1 struct {
-	OutChannel              string `json:"out_channel"`
-	AirtimeTotalPercent     string `json:"airtime_total_percent"`
-	MgmtPercent             string `json:"mgmt_percent"`
-	CtrlPercent             string `json:"ctrl_percent"`
-	DataPercent             string `json:"data_percent"`
-	OthersPercent           string `json:"others_percent"`
-	AvailablePercent        string `json:"available_percent"`
-	Noise                   string `json:"noise"`
-	ClientMacList           string `json:"Client_mac_list"`
-	ClientHostnameList      string `json:"Client_hostname_list"`
+	OutChannel          string `json:"out_channel"`
+	AirtimeTotalPercent string `json:"airtime_total_percent"`
+	MgmtPercent         string `json:"mgmt_percent"`
+	CtrlPercent         string `json:"ctrl_percent"`
+	DataPercent         string `json:"data_percent"`
+	OthersPercent       string `json:"others_percent"`
+	AvailablePercent    string `json:"available_percent"`
+	Noise               string `json:"noise"`
+	// ClientMacList       string `json:"Client_mac_list"`
+	// ClientHostnameList      string `json:"Client_hostname_list"`
 	ClientAirtimePercentage string `json:"client_airtime_percentage"`
 }
 type RfDetails struct {
@@ -39,7 +39,11 @@ type RfDetails struct {
 	RfAnalyticsRadio1 RfAnalyticsRadio1 `json:"rf_analytics_radio_1"`
 }
 
-func (c *Client) GetRfDetails(ctx context.Context, sensor_id int) (*RfDetails, error) {
+type RfDetailsResponse struct {
+	RfDetails RfDetails `json:"data"`
+}
+
+func (c *Client) GetRfDetails(ctx context.Context, sensor_id int) (*RfDetailsResponse, error) {
 	body := map[string]int{"sensor_id": sensor_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -49,7 +53,7 @@ func (c *Client) GetRfDetails(ctx context.Context, sensor_id int) (*RfDetails, e
 	}
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	res := RfDetails{}
+	res := RfDetailsResponse{}
 	if err := c.sendRequest(ctx, req, &res, "rf_details"); err != nil {
 		return nil, err
 	}
