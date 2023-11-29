@@ -92,3 +92,12 @@ func TestGetNetworkTestProfiles(t *testing.T) {
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
+
+func TestGetRfDetails(t *testing.T) {
+	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+
+	ctx := context.Background()
+	res, err := c.GetRfDetails(ctx, SensorID)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
