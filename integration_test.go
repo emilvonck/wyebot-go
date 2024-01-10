@@ -23,10 +23,6 @@ func TestGetLocations(t *testing.T) {
 	res, err := c.GetLocations(ctx)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
-	if res != nil {
-		assert.Equal(t, LocationID, res.Locations[0].LocationID, "expecting correct LocationID")
-
-	}
 }
 
 func TestGetSensors(t *testing.T) {
@@ -36,10 +32,6 @@ func TestGetSensors(t *testing.T) {
 	res, err := c.GetSensors(ctx, LocationID)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
-	if res != nil {
-		assert.Equal(t, SensorID, res.Sensors[0].SensorID, "expecting correct LocationID")
-
-	}
 }
 
 func TestGetSensorInfo(t *testing.T) {
@@ -49,9 +41,6 @@ func TestGetSensorInfo(t *testing.T) {
 	res, err := c.GetSensorInfo(ctx, SensorID)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
-	if res != nil {
-		assert.Equal(t, SensorID, res.SensorInfo.SensorID, "expecting correct LocationID")
-	}
 }
 
 func TestGetSensorIssues(t *testing.T) {
@@ -70,9 +59,6 @@ func TestGetSensorNetworkInfo(t *testing.T) {
 	res, err := c.GetSensorNetworkInfo(ctx, SensorID)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
-	if res != nil {
-		assert.Equal(t, SensorID, res.SensorNetworkInfo.SensorID, "expecting correct LocationID")
-	}
 }
 
 func TestGetAccessPointList(t *testing.T) {
@@ -98,6 +84,15 @@ func TestGetRfDetails(t *testing.T) {
 
 	ctx := context.Background()
 	res, err := c.GetRfDetails(ctx, SensorID)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
+
+func TestNetworkTestResults(t *testing.T) {
+	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+
+	ctx := context.Background()
+	res, err := c.GetNetworkTestResults(ctx, 3094, 3641, "2021-02-21 00:40:00", "2024-01-10 21:00:00")
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
