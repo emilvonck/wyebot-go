@@ -21,7 +21,7 @@ type RfAnalyticsRadio0 struct {
 	//ClientHostnameList      []string `json:"client_hostname_list"`
 	ClientAirtimePercentage string `json:"client_airtime_percentage"`
 }
-type RfAnalyticsRadio1 struct {
+type RfAnalyticsRadio struct {
 	OutChannel          string `json:"out_channel"`
 	AirtimeTotalPercent string `json:"airtime_total_percent"`
 	MgmtPercent         string `json:"mgmt_percent"`
@@ -35,12 +35,12 @@ type RfAnalyticsRadio1 struct {
 	ClientAirtimePercentage string `json:"client_airtime_percentage"`
 }
 type RfDetails struct {
-	RfAnalyticsRadio0 RfAnalyticsRadio0 `json:"rf_analytics_radio_0"`
-	RfAnalyticsRadio1 RfAnalyticsRadio1 `json:"rf_analytics_radio_1"`
+	Radio0 RfAnalyticsRadio `json:"rf_analytics_radio_0"`
+	Radio1 RfAnalyticsRadio `json:"rf_analytics_radio_1"`
 }
 
 type RfDetailsResponse struct {
-	RfDetails RfDetails `json:"data"`
+	Data RfDetails `json:"data"`
 }
 
 func (c *Client) GetRfDetails(ctx context.Context, sensor_id int) (*RfDetailsResponse, error) {

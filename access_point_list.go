@@ -19,11 +19,11 @@ type AccessPointDetails struct {
 	Vendor             string `json:"vendor"`
 	ClassificationType int    `json:"classification_type"`
 }
-type AccessPointDetailsResponse struct {
-	AccessPointDetails []AccessPointDetails `json:"data"`
+type AccessPointsDetailsResponse struct {
+	Data []AccessPointDetails `json:"data"`
 }
 
-func (c *Client) GetAccessPointList(ctx context.Context, sensor_id int) (*AccessPointDetailsResponse, error) {
+func (c *Client) GetAccessPointList(ctx context.Context, sensor_id int) (*AccessPointsDetailsResponse, error) {
 	body := map[string]int{"sensor_id": sensor_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -33,7 +33,7 @@ func (c *Client) GetAccessPointList(ctx context.Context, sensor_id int) (*Access
 	}
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	res := AccessPointDetailsResponse{}
+	res := AccessPointsDetailsResponse{}
 	if err := c.sendRequest(ctx, req, &res, "access_point_details"); err != nil {
 		return nil, err
 	}
