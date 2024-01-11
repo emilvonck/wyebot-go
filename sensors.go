@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-type SensorList struct {
-	Sensors []Sensor `json:"data"`
+type SensorsResponse struct {
+	Data []Sensor `json:"data"`
 }
 
 type Sensor struct {
@@ -17,7 +17,7 @@ type Sensor struct {
 	SensorName string `json:"sensor_name"`
 }
 
-func (c *Client) GetSensors(ctx context.Context, location_id int) (*SensorList, error) {
+func (c *Client) GetSensors(ctx context.Context, location_id int) (*SensorsResponse, error) {
 	body := map[string]int{"location_id": location_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -27,7 +27,7 @@ func (c *Client) GetSensors(ctx context.Context, location_id int) (*SensorList, 
 	}
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	res := SensorList{}
+	res := SensorsResponse{}
 	if err := c.sendRequest(ctx, req, &res, "sensor_details"); err != nil {
 		return nil, err
 	}

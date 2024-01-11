@@ -106,17 +106,17 @@ type HardwareDetails struct {
 	Service       Service       `json:"service"`
 	//LldpInfo      LldpInfo      `json:"lldp_info"`
 }
-type Data struct {
+type SensorInfo struct {
 	SensorID         int             `json:"sensor_id"`
 	SensorName       string          `json:"sensor_name"`
 	SensorStatusName string          `json:"sensor_status_name"`
 	HardwareDetails  HardwareDetails `json:"hardware_details"`
 }
-type SensorInfo struct {
-	SensorInfo Data `json:"data"`
+type SensorsInfoResponse struct {
+	Data SensorInfo `json:"data"`
 }
 
-func (c *Client) GetSensorInfo(ctx context.Context, sensor_id int) (*SensorInfo, error) {
+func (c *Client) GetSensorInfo(ctx context.Context, sensor_id int) (*SensorsInfoResponse, error) {
 	body := map[string]int{"sensor_id": sensor_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -126,7 +126,7 @@ func (c *Client) GetSensorInfo(ctx context.Context, sensor_id int) (*SensorInfo,
 	}
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	res := SensorInfo{}
+	res := SensorsInfoResponse{}
 	if err := c.sendRequest(ctx, req, &res, "sensor_info"); err != nil {
 		return nil, err
 	}

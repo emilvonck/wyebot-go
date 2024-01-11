@@ -21,7 +21,7 @@ type SensorNetworkInfo struct {
 	DNS2             string `json:"dns2"`
 }
 type SensorNetWorkInfoResponse struct {
-	SensorNetworkInfo SensorNetworkInfo `json:"data"`
+	Data SensorNetworkInfo `json:"data"`
 }
 
 func (c *Client) GetSensorNetworkInfo(ctx context.Context, sensor_id int) (*SensorNetWorkInfoResponse, error) {

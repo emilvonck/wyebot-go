@@ -20,7 +20,7 @@ type NetworkTestResult struct {
 	ExecutionID          int    `json:"execution_id"`
 }
 type NetworkTestResultsResponse struct {
-	NetworkTestResults []NetworkTestResult `json:"data"`
+	Data []NetworkTestResult `json:"data"`
 }
 
 func (c *Client) GetNetworkTestResults(ctx context.Context, location_id int, net_test_profile_id int, start string, end string) (*NetworkTestResultsResponse, error) {

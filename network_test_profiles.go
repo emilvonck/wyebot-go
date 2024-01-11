@@ -20,7 +20,7 @@ type NetworkTestProfile struct {
 	IsValid        bool   `json:"is_valid"`
 }
 type NetworkTestProfilesResponse struct {
-	NetworkTestProfiles []NetworkTestProfile `json:"data"`
+	Data []NetworkTestProfile `json:"data"`
 }
 
 func (c *Client) GetNetworkTestProfiles(ctx context.Context, location_id int) (*NetworkTestProfilesResponse, error) {

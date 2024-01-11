@@ -14,11 +14,11 @@ type Issue struct {
 	ProblemDescription string `json:"problem_description"`
 	Solution           string `json:"solution"`
 }
-type IssueList struct {
-	Issues []Issue `json:"data"`
+type IssuesResponse struct {
+	Data []Issue `json:"data"`
 }
 
-func (c *Client) GetSensorIssues(ctx context.Context, sensor_id int) (*IssueList, error) {
+func (c *Client) GetSensorIssues(ctx context.Context, sensor_id int) (*IssuesResponse, error) {
 	body := map[string]int{"sensor_id": sensor_id}
 	jsonBody, _ := json.Marshal(body)
 
@@ -28,7 +28,7 @@ func (c *Client) GetSensorIssues(ctx context.Context, sensor_id int) (*IssueList
 	}
 
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	res := IssueList{}
+	res := IssuesResponse{}
 	if err := c.sendRequest(ctx, req, &res, "issue_details"); err != nil {
 		return nil, err
 	}
