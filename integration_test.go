@@ -6,18 +6,19 @@ package wyebot
 import (
 	"context"
 	"os"
+	"strconv"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-const (
-	LocationID = 3094
-	SensorID   = 30940001
-)
+var BaseUrl = os.Getenv("WYEBOT_URL")
+var ApiKey = os.Getenv("WYEBOT_API_KEY")
+var LocationID, _ = strconv.Atoi(os.Getenv("WYEBOT_LOCATION_ID"))
+var SensorID, _ = strconv.Atoi(os.Getenv("WYEBOT_SENSOR_ID"))
 
 func TestGetLocations(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetLocations(ctx)
@@ -26,7 +27,7 @@ func TestGetLocations(t *testing.T) {
 }
 
 func TestGetSensors(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetSensors(ctx, LocationID)
@@ -35,7 +36,7 @@ func TestGetSensors(t *testing.T) {
 }
 
 func TestGetSensorInfo(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetSensorInfo(ctx, SensorID)
@@ -44,7 +45,7 @@ func TestGetSensorInfo(t *testing.T) {
 }
 
 func TestGetSensorIssues(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetSensorIssues(ctx, SensorID)
@@ -53,7 +54,7 @@ func TestGetSensorIssues(t *testing.T) {
 }
 
 func TestGetSensorNetworkInfo(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetSensorNetworkInfo(ctx, SensorID)
@@ -62,7 +63,7 @@ func TestGetSensorNetworkInfo(t *testing.T) {
 }
 
 func TestGetAccessPointList(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetAccessPointList(ctx, SensorID)
@@ -71,7 +72,7 @@ func TestGetAccessPointList(t *testing.T) {
 }
 
 func TestGetNetworkTestProfiles(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetNetworkTestProfiles(ctx, LocationID)
@@ -80,7 +81,7 @@ func TestGetNetworkTestProfiles(t *testing.T) {
 }
 
 func TestGetRfDetails(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetRfDetails(ctx, SensorID)
@@ -89,7 +90,7 @@ func TestGetRfDetails(t *testing.T) {
 }
 
 func TestNetworkTestResults(t *testing.T) {
-	c := NewClient(os.Getenv("WYEBOT_INTEGRATION_API_KEY"), "https://eu-cloud.wyebot.com")
+	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
 	res, err := c.GetNetworkTestResults(ctx, 3094, 3641, "2021-02-21 00:40:00", "2024-01-10 21:00:00")
