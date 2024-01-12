@@ -151,3 +151,12 @@ func TestGetDetailedIperfResults(t *testing.T) {
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
+
+func TestGetDetailedDnsResults(t *testing.T) {
+	c := NewClient(ApiKey, BaseUrl)
+
+	ctx := context.Background()
+	res, err := c.GetDetailedDnsResults(ctx, 1705089791, 30940002, 8943)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
