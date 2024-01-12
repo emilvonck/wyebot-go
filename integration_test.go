@@ -160,3 +160,12 @@ func TestGetDetailedDnsResults(t *testing.T) {
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
+
+func TestGetDetailedDeviceMonResults(t *testing.T) {
+	c := NewClient(ApiKey, BaseUrl)
+
+	ctx := context.Background()
+	res, err := c.GetDetailedDeviceMonResults(ctx, 1705090345, 30940002, 8944)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
