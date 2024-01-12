@@ -89,11 +89,20 @@ func TestGetRfDetails(t *testing.T) {
 	assert.NotNil(t, res, "expecting non-nil result")
 }
 
-func TestNetworkTestResults(t *testing.T) {
+func TestGetNetworkTestResults(t *testing.T) {
 	c := NewClient(ApiKey, BaseUrl)
 
 	ctx := context.Background()
-	res, err := c.GetNetworkTestResults(ctx, 3094, 3641, "2021-02-21 00:40:00", "2024-01-10 21:00:00")
+	res, err := c.GetNetworkTestResults(ctx, LocationID, 3641, "2021-02-21 00:40:00", "2024-01-10 21:00:00")
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
+
+func TestGetDetailedSpeedTestResults(t *testing.T) {
+	c := NewClient(ApiKey, BaseUrl)
+
+	ctx := context.Background()
+	res, err := c.GetDetailedSpeedTestResults(ctx, 1705054812, 30940001, 8816)
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
