@@ -89,6 +89,5 @@ func (c *Client) GetDetailedVideoResults(ctx context.Context, execution_id int, 
 	if err := c.sendRequest(ctx, req, &res, "network_test_profile_detailed_result_log"); err != nil {
 		return nil, err
 	}
-	fmt.Println(res.NetworkTestResults.VidconfResultStatusName)
 	return &res, nil
 }
