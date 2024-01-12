@@ -124,3 +124,12 @@ func TestGetDetailedAppResults(t *testing.T) {
 	assert.Nil(t, err, "expecting nil error")
 	assert.NotNil(t, res, "expecting non-nil result")
 }
+
+func TestGetDetailedVideoResults(t *testing.T) {
+	c := NewClient(ApiKey, BaseUrl)
+
+	ctx := context.Background()
+	res, err := c.GetDetailedVideoResults(ctx, 1705058501, 30940001, 8818)
+	assert.Nil(t, err, "expecting nil error")
+	assert.NotNil(t, res, "expecting non-nil result")
+}
